@@ -1,7 +1,5 @@
 # 🪣 S3 Bucket Lab
 
-**Objective:** Create an S3 bucket, upload files, and test access permissions.
-
 **Steps:**
 Create a bucket
 1. Log into AWS Console
