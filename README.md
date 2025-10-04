@@ -1,4 +1,4 @@
-# ☁️ AWS Learning Labs by Limin Xiong
+# ☁️ AWS Learning Labs
 
 This repository documents my hands-on AWS practice projects and experiments.
 Each folder contains screenshots, brief explanations, and step-by-step notes.
