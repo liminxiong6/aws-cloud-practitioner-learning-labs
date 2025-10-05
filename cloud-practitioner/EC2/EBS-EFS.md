@@ -19,6 +19,7 @@ EBS Snapshot/backup(can copy snapshot accross region)
 6. Snapshots -> select snapshot -> Actions: Archive snapshot
 6. Snashots -> delete snapshot -> Recycle Bin -> recover snapshot
 
+
 AMI (Amazon Machine Image: Built for a specific region, can copy accross the region)
 1. Create EC2 instance (Amazon Linux) -> User data (install apache server) 
   <img width="717" height="271" alt="image" src="https://github.com/user-attachments/assets/2e57134b-cf9b-4d75-9094-846ef08e6e8e" />
