@@ -1,6 +1,7 @@
 # EC2 Instance Storage Lab
 
 **Steps:**
+
 EBS Volume (Elastic Block Store: Persist data even the instance is termindated, only mounted to 1 instance at a time, bound to a specific AZ)
 1. Volums -> Create volume
    <img width="850" height="622" alt="image" src="https://github.com/user-attachments/assets/dd651ed9-88e1-4182-8ebe-d48484d84fe0" />
