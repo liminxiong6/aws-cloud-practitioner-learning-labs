@@ -17,7 +17,8 @@ EBS Snapshot/backup(can copy snapshot accross region)
 5. Snapshots -> Recycle bin -> Create retention rule
   <img width="1008" height="443" alt="image" src="https://github.com/user-attachments/assets/9b70f7e5-03dc-448c-9412-ebd8a419e065" />
 6. Snapshots -> select snapshot -> Actions: Archive snapshot
-6. Snashots -> delete snapshot -> Recycle Bin -> recover snapshot
+7. Snashots -> delete snapshot -> Recycle Bin -> recover snapshot
+
 
 
 AMI (Amazon Machine Image: Built for a specific region, can copy accross the region)
@@ -29,6 +30,7 @@ AMI (Amazon Machine Image: Built for a specific region, can copy accross the reg
 4. Instances -> Launch a instance -> select custom AMI -> user data (add the web server page)
    <img width="986" height="442" alt="image" src="https://github.com/user-attachments/assets/726fa540-8581-49a4-b2d7-975b28178835" />
    <img width="677" height="230" alt="image" src="https://github.com/user-attachments/assets/26c917fa-2a4f-4d8c-84cb-64f02ced762e" />
+
 
 Cleanup
 1. EC2 Dashboard -> Instances: terminate -> Volumes: delete -> AMIs: deregister
