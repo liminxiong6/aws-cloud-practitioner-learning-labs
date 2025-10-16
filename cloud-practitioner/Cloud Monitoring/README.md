@@ -13,3 +13,18 @@
 10. Change region to us-east-1 (the only region having billing alarm)
 11. Go to Billing -> Create alarm -> Greater than 8 USD -> In alarm -> Create new topic "Default_CloudWatch_Alarms_Topic_billing" -> bbbear@example.com -> Create topic -> Alarm name: DemoBillingAlarm -> Create alarm
 12. Delete Billing alarm -> Go back to origin Region
+
+## CloudWatch Logs 
+1. Go to CloudWatch -> Log groups (demo-lambda, lambda fn automatically create logs into CloudWatch logs)
+2. choose that log group -> click on log stream -> Log lines
+   <img width="1058" height="401" alt="image" src="https://github.com/user-attachments/assets/3b78d177-bfbc-4571-97b6-740ab46a099e" />
+3. Go to lambda fn -> Code source -> add `print("An extra log line!")` -> Deploy -> Test
+4. log group -> new log stream
+   <img width="984" height="384" alt="image" src="https://github.com/user-attachments/assets/5d232901-e949-4c5a-b627-9d7e4cb4e9e6" />
+5. Go to lambda fn -> Deploy -> Test
+   <img width="697" height="187" alt="image" src="https://github.com/user-attachments/assets/c0e9fb85-5617-46a1-8305-5f7297011c3c" />
+6. new log stream
+   <img width="1069" height="396" alt="image" src="https://github.com/user-attachments/assets/c23b0c7a-db8e-4e0d-a016-e115fcb0996f" />
+
+
+
