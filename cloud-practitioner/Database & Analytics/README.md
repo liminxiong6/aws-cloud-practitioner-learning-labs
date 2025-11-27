@@ -2,7 +2,7 @@
 
 **Steps:**
 RDS (Amazon Relational Database Service)
-1. Auroro and RDS: Database -> Create database -> Standard create -> Credentials Settings: Master password -> Storage: 20GiB -> Connectivity: public acess 'yes' (connect DB from pc) -> VPC Security Group: Create new
+1. Auroro and RDS: Database -> Create database (MySQL Free tier) -> Standard create -> Credentials Settings: Master password -> Storage: 20GiB -> Connectivity: public acess 'yes' (connect DB from pc) -> VPC Security Group: Create new
    <img width="1064" height="596" alt="image" src="https://github.com/user-attachments/assets/5ecc7d5d-be8e-46cc-8ec8-26042041d032" />
 2. Check Connectvitiy & security : Endpoint, VPC security groups
 3. Check Monitoring
