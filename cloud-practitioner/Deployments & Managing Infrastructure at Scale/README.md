@@ -9,7 +9,8 @@
 6. Go to Instances -> Look at the Tags
 7. Go to Stacks -> Update (direct update) -> Replace existing template (1-ec2-with-sg-eip.yaml) -> Parameters: SecruityGroupDescription - "Demo Description" -> Submit
 8. Go to Instances -> Networking(EIP attached)
-9. Go to Stacks -> Delete stack
+9. CloudFormation -> Template -> View in Infrastructure Composer
+10. Go to Stacks -> Delete stack
 
 ## Beanstalk
 1. Beanstalk -> Create application -> Web server environment -> Application name: MyApplication -> Environment information: name - MyApplication-dev
