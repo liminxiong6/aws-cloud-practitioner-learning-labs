@@ -16,21 +16,20 @@
 1. Beanstalk -> Create application -> Web server environment -> Application name: MyApplication -> Environment information: name - MyApplication-dev
 2. Platform -> Platform type: Managed platform, Platform: Node.js
 3. Application code -> Sample application -> Presets: Single instance
-4. Configure service access -> Service role: Create and use new service role
-5. Open another window, Go to IAM console -> create role: AWS service, Use case: EC2 -> Permissions policies: type "beanstalk", add AWSElasticBeanstalkWebTier, AWSElasticBeanstalkWorkerTier, AWSElasticBeanstalkMulticontainerDocker -> Role name: aws-elasticbeanstalk-ec2-role -> Create role
-6. Beanstalk -> EC2 instance profile: aws-elasticbeanstalk-ec2-role -> Skip to review -> Submit
-7. Events(come from Cloudformation: template, resources, view in application composer)
-8. Beanstalk -> Enviroments -> MyApplication-dev -> use domain name to access the web
-9. Beanstalk -> Application: MyApplication ( Create new envrionment (can create another env for the app)) -> Delete application
+4. Configure service access -> Service role: Create and use new service role: Elastic BeanStalk - Compute -> refresh EC2 instance profile : aws-elasticbeanstalk-ec2-role -> Skip to Review -> Create
+5. Check Events(come from Cloudformation Events, Template -> View in Insfrastructure Composer)
+6. EC2 console -> 1 instance running (has EIP)
+7. Beanstalk -> Enviroments -> MyApplication-dev -> use domain name to access the web
+8. Beanstalk -> Application: MyApplication ( Create new envrionment (can create another env for the app)) -> Delete application
 
 ## SSM Session Manager (no need to open port 22)
 1.  create a instance: ami t2.micro, disable SSH traffic
-2.  Open another window, IAM -> create role: aws service + ec2 -> Permission policies: AmazonSSMManagedInstanceCore -> Role name: DemoEC2RoleForSSM -> Create
+2.  Open another window, IAM -> create role: entity type-aws service + use case-ec2 role for AWS System Manager -> Permission policies: AmazonSSMManagedInstanceCore -> Role name: DemoEC2RoleForSSM -> Create
 3.  IAM instance profile -> choose the newly created role -> Launch instance
 4.  Go to ssm -> Fleet Manager (all the instances registered with SSM will appear here)
 5.  Ready to run a secure shell against it -> Go to Session Manager -> Start session(secure shell)
-6.  terminate instance
-7.  `ping google.com` -> `hostname`
+6.  `ping google.com` -> `hostname`
+7. terminate instance
 
 ## SSM Parameter Store
 1. Go to ssm -> Parameter Store -> Create parameter -> Name: demo-parameter, Tier: Standard, Type: String, Data type: text, Value: My configuration parameter -> Create
