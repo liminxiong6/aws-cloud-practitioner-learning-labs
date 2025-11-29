@@ -7,6 +7,7 @@ RDS (Amazon Relational Database Service)
 2. Check Connectvitiy & security : Endpoint, VPC security groups
 3. Check Monitoring
 4. Actions -> Take snapshot (allow to restore the DB to another one) -> use newly created snapshot to resotre the snapshot (create a bigger or copy DB with diff settings)
+
    <img width="651" height="418" alt="image" src="https://github.com/user-attachments/assets/28e2237f-7c31-4149-910a-9df07a91ae81" />
 6. Copy snapshot -> choose a different region (restore DB to a diff region)
 7. Share snapshot (share with others AWS accounts)
