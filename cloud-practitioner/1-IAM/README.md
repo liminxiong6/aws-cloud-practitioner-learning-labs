@@ -23,7 +23,7 @@ IAM policies
    <img width="1279" height="374" alt="image" src="https://github.com/user-attachments/assets/e145f99c-6d8c-4e5d-b7e0-f66ef819f82f" />
 
 IAM Password Policy & MFA (Multi Factor Authentication)
-1. Account settings -> Edit Password policy -> Custom
+1. IAM -> Account settings -> Edit Password policy -> Custom
 2. Security credentials -> Assign MFA device
    <img width="361" height="189" alt="image" src="https://github.com/user-attachments/assets/f4c26ad1-a479-4c4e-b18d-7a34502604c8" />
 
