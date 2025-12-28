@@ -1,7 +1,7 @@
 # Cloud Integrations Lab
 
 ## SQS (simple queue service)
-1. Go to SQA -> Create queue: Standard queue, name - "demo-sqs" -> Create
+1. Go to SQS -> Create queue: Standard queue, name - "demo-sqs" -> Create
 2. Send and receive messages -> Send message : "Hello world!" -> View details -> Receive messages (1 Messages available)
 3. Send message "another Hello!"
 4. Click on poll for messages (2 messages received) -> click on the message -> Body : "Hello world!"
