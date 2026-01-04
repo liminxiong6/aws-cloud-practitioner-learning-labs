@@ -28,8 +28,8 @@
 3. In Tag Editor -> Resource type: Security Group -> Select all search results -> Manage tags of selected resources -> Add Tag: Department - IT -> Review and apply changes
 4. Create Resource Group -> Tag based, Tag: Departmnet - IT -> Group name: IT-Resources
 5. Billing and Cost Management -> Cost Allocation Tags
-6. Data Exports (export cost and usage reports) -> Create Standard data export
-7. Cost Explorer -> Save to report library -> Access it through Cost Explorer Saved Reports
+6. Cost and Usage Analysis -> Data Exports (export cost and usage reports) -> Create Standard data export
+7. Cost and Usage Analysis -> Cost Explorer -> Save to report library -> Access it through Cost Explorer Saved Reports
 
 ## Monitoring Costs in the Cloud - Billing Alarms & AWS Budgets 
 1. Services: AWS Budgets -> Create budget -> Customize (advanced) -> Cost budget -> Budget name - DemoBudget, Period - Monthly, Budgeted amount - 10, Scope - Filter specific AWS cost dimensions
