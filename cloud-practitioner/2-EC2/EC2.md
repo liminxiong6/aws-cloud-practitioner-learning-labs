@@ -2,7 +2,7 @@
 
 **Steps:**
 EC2 instance
-1. Go to EC2 → Instances -> Launch instances -> Amazon Linux 2 -> Create new key pair (.pem) -> Create security group (Enable Allow HTTP traffic) -> Advanced Details: User data
+1. Go to EC2 → Instances -> Launch instances -> Amazon Linux 2 -> Create new key pair (.pem) -> Create security group (Enable Allow HTTP traffic from the internet and Allow SSH traffic from Anywhere) -> Advanced Details: User data
 2. Use pulic IP address to load the website
 3. Instance State -> Stop instance (Don't want to use)
 4. Instance State -> Start instance (use again)
