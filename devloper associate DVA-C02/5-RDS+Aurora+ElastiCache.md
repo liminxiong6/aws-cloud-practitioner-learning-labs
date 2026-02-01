@@ -13,3 +13,7 @@
 - Actions (we have Add reader (to scale read capacity) or Create cross-Region read replica or restore to point in time) -> Select Add replica auto scaling -> Add Auto Scaling policy : [Policy nanme: ReadReplicasScalingPolicy, Target metric: Average CPU utilization of Aurora Replicas,Target value: 60%, Cluster capacity details: minimum-1, max-15] -> Cancel
 - cleanup: delete the read instance -> delete write instance -> delete the whole database-2 cluster
 
+## ElasticCache
+- Amazon ElasticCache -> Get started -> Engine: Redis OSS, Deployment option: Node-based cluster, Creation method: Cluster cache, Cluster mode: disabled (only 1 shard), Cluster Info: DemoCluster, Location: AWS Cloud, disabled Multi-AZ, enable Auto-failover, Cluster settings: [Node type: cache.t2.micro, Number of replicas: 0(save cost)], Subnet group settings: [Name: my-first-subnet-group], Security: [If Enable Encryption in transit, can sleect user group access control list], disable automatic backups -> Create
+- can use the cache's primary endpoint or reader endpoint to write some codes
+- cleanup: select the cluster -> Actions: Delete (No backup)
