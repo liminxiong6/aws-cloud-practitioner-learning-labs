@@ -99,3 +99,6 @@
 - Trigger eu-central-1 unhealthy -> Edit health check -> Enable invert health check status
 - In cloudshell: run `dig multi.example.com`, get 2 answers (2 IPs)
 - Cleanup: untick invert health check status of eu-central-1 health check
+
+# Section Cleanup:
+- Delete hosted zone, ALB and the EC2 instances
