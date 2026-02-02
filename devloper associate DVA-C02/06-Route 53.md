@@ -61,4 +61,41 @@
 - Add another record -> record name: weighted.example.com, record type: A, value: 3.70.14.253(eu-central-1), TTL: 300, Routing policy: Latency, Region: eu-central-1, Record ID: eu-central-1
 - Access "weighted.example.com" in the browser, response "Hello word from eu-central-1" (if close to eu)
 - In CloudShell -> run `dig latency.example.com`, ANSWER SECTION: 20 A 3.70.14.253
-- if use VPN set to Canada, close to US, response "Hello word from us-east-1" 
+- if use VPN set to Canada, close to US, response "Hello word from us-east-1"
+
+## Route 53 - Health Checks
+- Route 53 -> Health checks -> Create health check -> Name: us-east-1, What to monitor: Endpoint, Specify endpoint by: IP address, IP address: 54.172.8.44, Port: 80, Path: /, Request interval: Standard(30 s) -> Create
+- Create health check -> Name: ap-southeast-1, What to monitor: Endpoint, Specify endpoint by: IP address, IP address: 54.251.92.166, Port: 80, Path: /, Request interval: Standard(30 s) -> Create
+- Create health check -> Name: eu-central-1, What to monitor: Endpoint, Specify endpoint by: IP address, IP address: 3.70.14.253, Port: 80, Path: /, Request interval: Standard(30 s) -> Create
+- Edit one instance to remove 80 port inbound rule -> Health check dashboard -> Unhealthy
+- Select that health check (unhealthy) -> Health checkers tab -> View last fialed check
+- Create health check -> Name: calculated, What to monitor: Status of other health checks -> Health checks to monitor: [ap-southeast-1, us-east-1, eu-central-1], Report healthy when: all health checks are healthy -> Create
+- Create health check -> Name: calculated, What to monitor: State of CloudWatch alarm -> Cancel
+
+## Routing Policy - Failover
+- Hosted zones -> records -> Create record -> record name: failover.example.com, record type: A, value: 3.70.14.253(eu-central-1), TTL: 60, Routing policy: Failover, Failover record type: Primary, Health check: eu-central-1, Record ID: EU
+-  Add another record -> record name: failover.example.com, record type: A, value: 54.172.8.44(us-east-1), TTL: 60, Routing policy: Failover, Failover record type: Secondary, Health check: eus-east-1(optional), Record ID: US
+-  Remove port 80 inbound rules in the security group of eu EC2 instance
+-  Access the failover.example.com -> failover to the secondary instance
+-  Add back teh HTTP inbound rule in the security group of eu EC2 instance
+
+## Routing Policy - Geolocation
+- Hosted zones -> records -> Create record -> record name: geo.example.com, record type: A, value: 54.251.92.166 (ap-southeast-1), TTL: 300, Routing policy: Geolocation, Location: Asia, Record ID: Asia
+- Add another record -> record name: geo.example.com, record type: A, value: 54.172.8.44(us-east-1), TTL: 300, Routing policy: Geolocation, Location: United States, Record ID: US
+- Add another record -> record name: geo.example.com, record type: A, value: 3.70.14.253(eu-central-1), TTL: 300, Routing policy: Geolocation, Location: Default, Record ID: Default EU
+- Access geo.example.com -> if not locates in US or Asia, then go to eu-central-1 IP
+
+## Routing Policy - Traffic Flow & Geoproximity
+- Route 53 -> Traffic policies -> Create traffic policy -> Policy name: DemoGeoPolicy -> Next
+- Start point: [DNS type: A] -> Connect to Geoproximity rule -> Region 1: [Endpoint Location: US East (N. Virginia)] -> Connect to Endpoint: [Type: Value, Value: 54.172.8.44(us-east-1)] -> Region 2: [Endpoint Location: Asia Pacific (Singapore)] -> Connect to Endpoint: [Type: Value, Value: 54.251.92.166 (ap-southeast-1)] -> Change the bias and view the map to see what's the difference -> Region 3: [Endpoint Location: EU (Frankfurt)] -> Connect to Endpoint: [Type: Value, Value: 3.70.14.253(eu-central-1)] -> Create traffic policy
+- policy record DNS name: proximity.example.com, TTL: 60 -> Create policy record
+- Version: 1 -> Edit the policy as new version
+
+## Routing Policy - Multi Value
+- Hosted zones -> records -> Create record -> record name: multi.example.com, record type: A, value: 54.172.8.44(us-east-1), TTL: 60, Routing policy: Multivalue answer, Health check: us-east-1, Record ID: US
+- Add another record -> record name: multi.example.com, record type: A, value: 54.251.92.166 (ap-southeast-1), TTL: 60, Routing policy: Multivalue answer, Health check: ap-southeast-1, Record ID: Asia
+- Add another record -> record name: multi.example.com, record type: A, value: 3.70.14.253(eu-central-1), TTL: 60, Routing policy: Multivalue answer, Health check: eu-central-1, Record ID: EU -> Create record
+- In cloudshell: run `dig multi.example.com`, get 3 answers (3 IPs)
+- Trigger eu-central-1 unhealthy -> Edit health check -> Enable invert health check status
+- In cloudshell: run `dig multi.example.com`, get 2 answers (2 IPs)
+- Cleanup: untick invert health check status of eu-central-1 health check
