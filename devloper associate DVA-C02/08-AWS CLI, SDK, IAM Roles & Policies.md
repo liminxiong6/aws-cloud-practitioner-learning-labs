@@ -38,3 +38,20 @@
   curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/identity-credentials/ec2/security-credentials/ec2-instance
   ```
 - Cleanup: Terminate EC2 instance
+
+##  AWS CLI profile (Manage multiple AWS Accounts)
+- `aws configure --profile my-other-aws-account` now the AWS Access Key ID is none, then we configure another profile
+- `cat credentials` we have 2 credentials (default + my-other-aws-account)
+- `aws s3 ls` execute this function against the default profile, to execute against other profile `aws s3 ls --profile my-other-aws-account`
+
+## AWS CLI with MFA
+- IAM -> Users -> my-user -> Security credentials tab -> Manage Assigned MFA device -> Type: Virtual MFA device -> Scan QR code -> have a arn-...
+- in Console -> `aws sts get-session-token help`
+- `aws sts set-session-token --serial-number arn:aws:iam:.... --token-code 82313`  -> Get access key ID, Secret Acess Key
+- `aws configure --profile mfa` -> copy paste the access key ID, Secret Acess Key
+- every time do an API call will use the temporary aws-session-token
+- `aws s3 ls --profile mfa`
+
+## AWS Signature v4 Signing (Sigv4)
+- S3 -> bucket -> coffee.jpg -> Open button -> Copy the URL -> Query String has X-AMz-Algo..., X-Ams-Signature, ...
+
