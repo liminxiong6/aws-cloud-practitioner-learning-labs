@@ -16,3 +16,27 @@
 - To launch more tasks in the service: Update the service -> Desired tasks: 3 -> Update
 - DemoCluster -> Services -> nginxdemos-hello -> Tasks -> 3 tasks (3 containers) -> ALB will distribute the load between all containers (refresh ALB DNS web page, ip address keeps changing)
 - Cleanup: upddate the service -> Desired tasks: 0 (service still there, no containers running on ECS) -> EC2: ASG -> make sure Infra-ECS-Cluster asg desired capacity is 0 (no EC2 instance running on ECS)
+
+## Amazon ECS Task Definition
+- Amazon ECS -> Create new task definition -> Task definition family: wordpress -> Infrastructure requirements: [Launch type: AWS Fargate (Network mode only awsvpc) & Amazon EC2 instances] -> Container - 1 -> [Name: word press, Image URI: wordpress, Essential container: Yes (if the container fails and is killed, all the tasks is going to be killed), Environment variables: [Kay: SECRET_DB_PASSWORD, Value type: ValueFROM, Value: ARN of the secrets manager secret], or Add Environment variables from the file -> Storage -> Volume type: Bind mount, (Container mount points: [Container: wordpress(to mount the volume on), Volumes from]) -> Monitoring -> Enable Trace collection & Metric collection -> Create -> Create new revision to modify
+
+## Clean up
+- Amazon ECS -> Clusters -> DemoCluster -> Services -> nginxdemo-hello -> Update service -> Desired tasks: 0 -> Delete Service
+- CloudFormation -> Stacks -> ECS-Console-VS-Service-nginxdemos-hello DELETE_IN_PROGRESS -> Resources (ECS Service, Listener, LoadBalancer, SecurityGroup, TargetGroup) -> After all these deleted -> DemoCluster -> Delete Service -> CloudFormation -> Stacks -> Infra-ECS-Cluster-DemoCluster (Resources: EC2 CapacityProvider)
+- Task definitions (don't cost money, can leave there) -> Actions -> Deregister
+
+## Amazon ECR 
+- Amazon ECS -> Task definitions -> nginxdemo-hello:1 -> Containers -> nginxdemos/hello Image (from docker hub)
+- To host that image onto our private ECR repository: Amazon ECR -> Repositories -> Create -> Private, name: demomyname
+- demomyname -> Push commands (have docker installed on PC `docker --version`) -> login `aws ecr get-login-password --region eu-west-1 | docker login --username AWS ....`
+- pull the image `docker pull nginxdemos/hello` -> rename the image `docker tag nginxdemos/hello:latest 787....dkr.ecr.eu-west-1.amazonaws.com/demomyname:latest` -> push to amazon ecr repository `docker push 787....dkr.ecr.eu-west-1.amazonaws.com/demomyname:latest` -> latest image created for image named demomyname
+- setting task definition with this image(to pull from Amazon ECR instead of from docker hub)
+
+## AWS CoPilot
+- https://aws.github.io/copilot-cli/docs/overview/
+- `brew install aws/tap/copilot-cli`
+- `copilot --help`
+- aws cli and docker desktop installed `aws --version`, `docker --version`
+- `git clone https://github.com/aws-samples/aws-copilot-sample-service example` -> `cd example` -> `copilot init` -> Application name: example-app, choose load balanced web service, service name: front-end, ./Dockerfile, Environment's name: test
+- "Your service is accessible at http://..."
+- cleanup: `copilot app delete`
